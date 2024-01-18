@@ -1,22 +1,18 @@
-import logo from './logo.svg';
+import { BookList } from './components/BookList';
+
 import './App.css';
 
 function App() {
+  const books = [
+    {"title": "Anna Karenina", "author": "Tolstoy, Leo", "year": 1814, "edition": "Penguin"},
+    {"title": "Lord of the rings", "author": "Tolkien, J.R.", "year": 1937, "edition": "Penguin"},
+    {"title": "Hamlet", "author": "Tolkien, J.R.", "year": 1937, "edition": "Penguin"}
+  ];
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <BookList books={books}/>
       </header>
     </div>
   );
