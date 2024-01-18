@@ -1,7 +1,12 @@
+import { useEffect } from "react"
 import { Book } from "./Book"
 
 export const BookList = (props) => {
-    const bookElements = props.books.map(book => <Book {...book} />)
+    // useEffect(() => {
+    //     console.log('Mounting');
+    // })
+
+    const bookElements = props.books.map((book, idx) => <Book key={idx} {...book} />)
 
     return (
         <ul>
