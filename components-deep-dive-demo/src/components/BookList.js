@@ -1,20 +1,7 @@
-export const BookList = (props) => {
-    const bookElements = [];
+import { Book } from "./Book"
 
-    for (const book of props.books) {
-        bookElements.push(
-            <li>
-                <article>
-                    <h2>{book.title}</h2>
-                    <div>Year: {book.year}</div>
-                    <div>{book.edition}</div>
-                    <footer>
-                        <span>Author: {book.author}</span>
-                    </footer>
-                </article>
-            </li>
-        );
-    }
+export const BookList = (props) => {
+    const bookElements = props.books.map(book => <Book {...book} />)
 
     return (
         <ul>
