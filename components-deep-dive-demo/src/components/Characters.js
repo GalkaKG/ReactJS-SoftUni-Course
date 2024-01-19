@@ -14,6 +14,7 @@ export const CharacterList = () => {
 
     return (
         <ul>
+            {!characters.length && <li>Loading...</li>}
             {characters.map(person => (
                 <li key={person.name}>{person.name}</li>
             ))}
