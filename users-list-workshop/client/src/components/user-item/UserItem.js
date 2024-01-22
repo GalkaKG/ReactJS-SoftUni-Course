@@ -1,15 +1,19 @@
-export const UserItem = (props) => {
+import { Fragment } from "react";
+
+export const UserItem = ({firstName, lastName, email, phoneNumber, createdAt, imageUrl}) => {
+    const blankProfileUrl = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+    
     return (
-        <tr>
+        <Fragment>
               <td>
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                  alt="Peter's profile" className ="image" />
+                <img src={imageUrl || blankProfileUrl}
+                  alt={`${firstName}'s profile`} className ="image" />
               </td>
-              <td>{props.user.firstName}</td>
-              <td>Johnson</td>
-              <td>peter@abv.bg</td>
-              <td>0812345678</td>
-              <td>June 28, 2022</td>
+              <td>{firstName}</td>
+              <td>{lastName}</td>
+              <td>{email}</td>
+              <td>{phoneNumber}</td>
+              <td>{createdAt}</td>
 
               <td className ="actions">
                 <button className ="btn edit-btn" title="Edit">
@@ -39,6 +43,6 @@ export const UserItem = (props) => {
                   </svg>
                 </button>
               </td>
-            </tr>
+            </Fragment>
     );
 };

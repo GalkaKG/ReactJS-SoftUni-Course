@@ -1,25 +1,23 @@
-import './App.css';
+import {useState, useEffect} from 'react';
+
+import * as userService from './services/userService';
+
 import { Header } from "./components/common/Header";
 import { Footer } from "./components/common/Footer";
 import { Search } from './components/search/Search';
 import { UserList } from './components/user-list/UserList';
-import {useState, useEffect} from 'react';
+import './App.css';
 
-const baseUrl = 'http://localhost:3030/jsonstore'
 
 function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-      fetch(`${baseUrl}/users`)
-        .then(res => res.json())
-        .then(result => {
-          setUsers(Object.values(result));
-          // console.log(result);
-        })
+      userService.getAll()
+        .then(users => setUsers(users));
   }, []);
 
-  console.log(`This is users: ${JSON.stringify(users, null, 2)}`);
+  // console.log(`This is users: ${JSON.stringify(users, null, 2)}`);
 
   return (
     <div className="App">
