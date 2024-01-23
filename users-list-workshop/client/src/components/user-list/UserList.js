@@ -9,22 +9,20 @@ export const UserList = ({users}) => {
     const detailsClickHandler = (userId) => {
       userService.getOne(userId)
         .then(user => {
-          setSelectedUser(user);
-          // console.log(user);
-          // console.log(selectedUser); 
+          setSelectedUser(user); 
         });
     }
-    
-    useEffect(() => {
-      // console.log(selectedUser);
-  }, [selectedUser]);
+
+    const detailsCloseHandler = () => {
+      setSelectedUser(null);
+    }
 
     return (
         <div className ="table-wrapper">
 
         {/* Overlap components */}
         
-        {selectedUser && <UserDetails  user={selectedUser} />}
+        {selectedUser && <UserDetails  user={selectedUser} onClose={detailsCloseHandler} />}
 
         <table className ="table">
           <thead>
