@@ -1,4 +1,5 @@
 export const UserDetails = (user) => {
+  user = user.user
     return (     
     <div className ="overlay">
       <div className ="backdrop"></div>
@@ -24,7 +25,7 @@ export const UserDetails = (user) => {
               <p>User Id: <strong>{user._id}</strong></p>
               <p>
                 Full Name:
-                <strong> {user.firstname} {user.lastName}</strong>
+                <strong> {user.firstName} {user.lastName}</strong>
               </p>
               <p>Email: <strong>{user.email}</strong></p>
               <p>Phone Number: <strong>{user.phoneNumber}</strong></p>
@@ -44,7 +45,5 @@ export const UserDetails = (user) => {
 };
 
 function printAddress(data) {
-    // console.log(data);
-    // return `${data.country}, ${data.city}, ${data.street}, ${data.streetNumber}`;
-    return 
+    return `${data.country}, ${data.city}, ${data.street}, ${data.streetNumber}`;
 }

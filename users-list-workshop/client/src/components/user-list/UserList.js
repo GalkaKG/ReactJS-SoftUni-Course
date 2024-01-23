@@ -10,11 +10,14 @@ export const UserList = ({users}) => {
       userService.getOne(userId)
         .then(user => {
           setSelectedUser(user);
-          console.log(user);
-          
+          // console.log(user);
+          // console.log(selectedUser); 
         });
     }
     
+    useEffect(() => {
+      // console.log(selectedUser);
+  }, [selectedUser]);
 
     return (
         <div className ="table-wrapper">
