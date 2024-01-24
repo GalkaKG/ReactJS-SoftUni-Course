@@ -17,6 +17,9 @@ export const getAll = async () => {
 
 export const getOne = async (userId) => {
     try {
+      if (userId == null) {
+        return
+      }
       const response = await fetch(`${baseUrl}/users/${userId}`);
       const result = await response.json();
   

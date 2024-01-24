@@ -4,6 +4,7 @@ import { UserDetails } from "../user-details/UserDetails";
 import { UserItem } from "../user-item/UserItem";
 import { UserEdit } from "../user-edit/UserEdit";
 import { UserDelete } from "../user-delete/UserDelete";
+import { UserCreate } from "../user-crreate/UserCreate";
 import { userActions } from "./UserListConstants";
 
 
@@ -49,6 +50,7 @@ export const UserList = ({users}) => {
     }
 
     return (
+      <>
         <div className ="table-wrapper">
 
         {/* Overlap components */}
@@ -56,6 +58,7 @@ export const UserList = ({users}) => {
         {userAction.action == userActions.Details && <UserDetails  user={userAction.user} onClose={closeHandler} />}
         {userAction.action == userActions.Edit && <UserEdit user={userAction.user} onClose={closeHandler} />}
         {userAction.action == userActions.Delete && <UserDelete user={userAction.user} onClose={closeHandler} />}
+        {userAction.action == userActions.Add && <UserCreate onClose={closeHandler} />}
 
         <table className ="table">
           <thead>
@@ -121,5 +124,9 @@ export const UserList = ({users}) => {
           </tbody>
         </table>
       </div>
+
+
+      <button className="btn-add btn" onClick={() => onActionClick(null, userActions.Add)}>Add new user</button>
+      </>
     );
 }
