@@ -10,24 +10,13 @@ import './App.css';
 
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-      userService.getAll()
-        .then(users => setUsers(users));
-  }, []);
-
-  // const addUserHandler =
-
-  // console.log(`This is users: ${JSON.stringify(users, null, 2)}`);
-
   return (
     <div className="App">
         <Header />
         <main className="main">
           <section className="card users-container">
             <Search />
-            <UserList users={users} />
+            <UserList />
           </section>
         </main>
 

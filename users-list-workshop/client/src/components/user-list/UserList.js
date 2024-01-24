@@ -8,9 +8,16 @@ import { UserCreate } from "../user-crreate/UserCreate";
 import { userActions } from "./UserListConstants";
 
 
-export const UserList = ({users}) => {
-    // const [selectedUser, setSelectedUser] = useState(null);
-    const [userAction, setUserAction] = useState({user: null, action: null});
+export const UserList = () => {
+  const [users, setUsers] = useState([]);
+
+  const [userAction, setUserAction] = useState({user: null, action: null});
+
+  useEffect(() => {
+      userService.getAll()
+        .then(users => setUsers(users));
+  }, []);
+
 
     const onActionClick = (userId, actionType) => {
       userService.getOne(userId)
@@ -59,6 +66,7 @@ export const UserList = ({users}) => {
       userService.create(userData)
         .then(user => {
             // console.log(user);
+            setUsers(oldUsers => [...oldUsers, user]);
             closeHandler();
         })
     }
