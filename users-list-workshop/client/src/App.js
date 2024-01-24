@@ -17,6 +17,8 @@ function App() {
         .then(users => setUsers(users));
   }, []);
 
+  // const addUserHandler =
+
   // console.log(`This is users: ${JSON.stringify(users, null, 2)}`);
 
   return (

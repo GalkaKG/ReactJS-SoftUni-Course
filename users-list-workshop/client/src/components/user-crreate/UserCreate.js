@@ -1,4 +1,4 @@
-export const UserCreate = ({onClose}) => {
+export const UserCreate = ({onClose, onUserCreate}) => {
     return (
         <div className="overlay">
         <div className="backdrop" onClick={onClose}></div>
@@ -15,7 +15,7 @@ export const UserCreate = ({onClose}) => {
                 </svg>
               </button>
             </header>
-            <form>
+            <form onSubmit={onUserCreate}>
               <div className="form-row">
                 <div className="form-group">
                   <label for="firstName">First name</label>

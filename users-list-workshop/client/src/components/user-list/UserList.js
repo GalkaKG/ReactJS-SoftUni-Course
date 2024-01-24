@@ -49,6 +49,20 @@ export const UserList = ({users}) => {
       setUserAction({user: null, action: null});
     }
 
+    const userCreateHandler = (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const { firstName, lastName, email, imageUrl, phoneNumber, ...address } = Object.fromEntries(formData);
+      const userData = { firstName, lastName, email, imageUrl, phoneNumber, ...address }
+      
+      userService.create(userData)
+        .then(user => {
+            // console.log(user);
+            closeHandler();
+        })
+    }
+
     return (
       <>
         <div className ="table-wrapper">
@@ -58,7 +72,7 @@ export const UserList = ({users}) => {
         {userAction.action == userActions.Details && <UserDetails  user={userAction.user} onClose={closeHandler} />}
         {userAction.action == userActions.Edit && <UserEdit user={userAction.user} onClose={closeHandler} />}
         {userAction.action == userActions.Delete && <UserDelete user={userAction.user} onClose={closeHandler} />}
-        {userAction.action == userActions.Add && <UserCreate onClose={closeHandler} />}
+        {userAction.action == userActions.Add && <UserCreate onClose={closeHandler} onUserCreate={userCreateHandler}/>}
 
         <table className ="table">
           <thead>
