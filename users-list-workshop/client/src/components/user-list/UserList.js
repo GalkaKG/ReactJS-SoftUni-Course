@@ -2,19 +2,50 @@ import { useState, useEffect } from "react";
 import * as userService from '../../services/userService';
 import { UserDetails } from "../user-details/UserDetails";
 import { UserItem } from "../user-item/UserItem";
+import { UserEdit } from "../user-edit/UserEdit";
+import { UserDelete } from "../user-delete/UserDelete";
+import { userActions } from "./UserListConstants";
+
 
 export const UserList = ({users}) => {
-    const [selectedUser, setSelectedUser] = useState(null);
+    // const [selectedUser, setSelectedUser] = useState(null);
+    const [userAction, setUserAction] = useState({user: null, action: null});
 
-    const detailsClickHandler = (userId) => {
+    const onActionClick = (userId, actionType) => {
       userService.getOne(userId)
         .then(user => {
-          setSelectedUser(user); 
+            // setSelectedUser(user); 
+            setUserAction({
+                user,
+                action: actionType
+            });
         });
     }
 
-    const detailsCloseHandler = () => {
-      setSelectedUser(null);
+    const editClickHandler = (userId) => {
+      userService.getOne(userId)
+      .then(user => {
+          // setSelectedUser(user); 
+          setUserAction({
+              user,
+              action: userActions.Edit
+          });
+      });
+    }
+
+    const deleteClickHandler = (userId) => {
+      userService.getOne(userId)
+      .then(user => {
+          // setSelectedUser(user); 
+          setUserAction({
+              user,
+              action: userActions.Delete
+          });
+      });
+    }
+
+    const closeHandler = () => {
+      setUserAction({user: null, action: null});
     }
 
     return (
@@ -22,7 +53,9 @@ export const UserList = ({users}) => {
 
         {/* Overlap components */}
         
-        {selectedUser && <UserDetails  user={selectedUser} onClose={detailsCloseHandler} />}
+        {userAction.action == userActions.Details && <UserDetails  user={userAction.user} onClose={closeHandler} />}
+        {userAction.action == userActions.Edit && <UserEdit user={userAction.user} onClose={closeHandler} />}
+        {userAction.action == userActions.Delete && <UserDelete user={userAction.user} onClose={closeHandler} />}
 
         <table className ="table">
           <thead>
@@ -82,7 +115,7 @@ export const UserList = ({users}) => {
           <tbody>
             {users.map(user => 
               <tr key={user._id}>
-                <UserItem {...user} detailsClickHandler={detailsClickHandler}/>
+                <UserItem {...user} onActionClick={onActionClick}/>
               </tr>
             )}
           </tbody>
