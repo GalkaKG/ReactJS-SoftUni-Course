@@ -1,16 +1,22 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
 
 function App() {
+  const [username, setUsername] = useState('');
 
   const submitHandler = (e) => {
     e.preventDefault();
     
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get('username');
-    const password = formData.get('password');
-    console.log(username);
-    console.log(password);
+    // const formData = new FormData(e.currentTarget);
+    // const username = formData.get('username');
+    // const password = formData.get('password');
+    // console.log(username);
+    // console.log(password);
+  }
+
+  const usernameChangeHandler = (e) => {
+    console.log(e.target.value);
+    setUsername(e.target.value);
   }
 
   return (
@@ -19,7 +25,13 @@ function App() {
         <form onSubmit={submitHandler}>
             <div>
               <label htmlFor="username">Username</label>
-              <input id="username" type="text" name="username" />
+              <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  onChange={usernameChangeHandler}
+                  value={username}
+              />
             </div>
             <div>
               <label htmlFor="password">Password</label>
