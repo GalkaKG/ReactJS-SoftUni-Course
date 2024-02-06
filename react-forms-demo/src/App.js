@@ -15,7 +15,7 @@ function App() {
   }
 
   const usernameChangeHandler = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setUsername(e.target.value);
   }
 
@@ -36,6 +36,10 @@ function App() {
             <div>
               <label htmlFor="password">Password</label>
               <input id="password" type="text" name="password"/>
+            </div>
+            <div>
+              <label htmlFor="bio">Bio:</label>
+              <textarea name="bio" id="bio" cols="30" rows="10" />
             </div>
             <div>
               <input type="submit" value="Login" />
