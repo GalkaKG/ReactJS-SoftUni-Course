@@ -33,14 +33,25 @@ function App() {
                   value={username}
               />
             </div>
+
             <div>
               <label htmlFor="password">Password</label>
               <input id="password" type="text" name="password"/>
             </div>
+
             <div>
               <label htmlFor="bio">Bio:</label>
               <textarea name="bio" id="bio" cols="30" rows="10" />
             </div>
+
+            <div>
+              <label htmlFor="gender">Gender: </label>
+              <select name="gender" id="gender">
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+              </select>
+            </div>
+
             <div>
               <input type="submit" value="Login" />
               {/* <button type="submit">Login</button> */}
