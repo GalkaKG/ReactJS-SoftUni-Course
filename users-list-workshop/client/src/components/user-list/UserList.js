@@ -52,6 +52,12 @@ export const UserList = () => {
       });
     }
 
+    const createUserOpenHandler = () => {
+        setUserAction({
+            action: userActions.Add
+        });
+    }
+
     const closeHandler = () => {
       setUserAction({user: null, action: null});
     }
@@ -146,7 +152,7 @@ export const UserList = () => {
       </div>
 
 
-      <button className="btn-add btn" onClick={() => onActionClick(null, userActions.Add)}>Add new user</button>
+      <button className="btn-add btn" onClick={createUserOpenHandler}>Add new user</button>
       </>
     );
 }
