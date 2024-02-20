@@ -1,4 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
+
+import Home from './components/Home';
+import About from './components/About';
+import Pricing from './components/Pricing';
+import Contacts from './components/Contacts';
 import './App.css';
 
 function App() {
@@ -7,10 +12,10 @@ function App() {
       <h1>Hello React Router</h1>
 
       <Routes>
-        <Route path='/' element={<h2>Home page</h2>} />
-        <Route path='/about' element={<h2>About page</h2>} />
-        <Route path='/pricing' element={<h2>Pricing page</h2>} />
-        <Route path='/contacts' element={<h2>Contacts page</h2>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/pricing' element={<Pricing />} />
+        <Route path='/contacts' element={<Contacts />} />
       </Routes>
     </div>
   );
