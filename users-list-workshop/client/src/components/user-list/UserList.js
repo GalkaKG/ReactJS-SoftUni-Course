@@ -4,7 +4,7 @@ import { UserDetails } from "../user-details/UserDetails";
 import { UserItem } from "../user-item/UserItem";
 import { UserEdit } from "../user-edit/UserEdit";
 import { UserDelete } from "../user-delete/UserDelete";
-import { UserCreate } from "../user-crreate/UserCreate";
+import { UserCreate } from "../user-create/UserCreate";
 import { userActions } from "./UserListConstants";
 
 
@@ -56,12 +56,10 @@ export const UserList = () => {
       setUserAction({user: null, action: null});
     }
 
-    const userCreateHandler = (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(e.target);
-      const { firstName, lastName, email, imageUrl, phoneNumber, ...address } = Object.fromEntries(formData);
-      const userData = { firstName, lastName, email, imageUrl, phoneNumber, ...address }
+    const userCreateHandler = (userData) => {
+      // const formData = new FormData(e.target);
+      // const { firstName, lastName, email, imageUrl, phoneNumber, ...address } = Object.fromEntries(formData);
+      // const userData = { firstName, lastName, email, imageUrl, phoneNumber, ...address }
       
       userService.create(userData)
         .then(user => {
