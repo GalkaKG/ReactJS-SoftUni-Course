@@ -46,6 +46,8 @@ export const UserCreate = ({onClose, onUserCreate}) => {
       }));
     }
 
+    const isFormValid = !Object.values(errors).some(x => x);
+
     return (
         <div className="overlay">
         <div className="backdrop" onClick={onClose}></div>
@@ -179,7 +181,7 @@ export const UserCreate = ({onClose, onUserCreate}) => {
                 </div>
               </div>
               <div id="form-actions">
-                <button id="action-save" className="btn" type="submit">Save</button>
+                <button id="action-save" className="btn" type="submit" disabled={isFormValid}>Save</button>
                 <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                   Cancel
                 </button>
