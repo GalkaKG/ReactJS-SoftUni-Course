@@ -4,6 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Pricing from './components/Pricing';
 import Contacts from './components/Contacts';
+import NotFound from './components/NotFound';
 import './App.css';
 
 function App() {
@@ -12,9 +13,10 @@ function App() {
       <h1>Hello React Router</h1>
 
       <Routes>
+        <Route path='*' element={<NotFound />} />
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/pricing' element={<Pricing />} />
+        <Route path='/pricing/*' element={<Pricing />} />
         <Route path='/contacts' element={<Contacts />} />
       </Routes>
     </div>
