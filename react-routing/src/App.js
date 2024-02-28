@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Home from './components/Home';
 import About from './components/About';
@@ -23,6 +23,8 @@ function App() {
         <Route path='/pricing/*' element={<Pricing />} />
         <Route path='/contacts' element={<Contacts />} />.
         <Route path='/products/:productId' element={<Products />} />
+        <Route path='/products/1' element={<Products />} />
+        <Route path='/millennium-falcon' element={<Navigate to={'/products/10'} />} />
       </Routes>
     </div>
   );

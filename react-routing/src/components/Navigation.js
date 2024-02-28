@@ -8,6 +8,8 @@ export default function Navigation() {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/pricing">Pricing</Link></li>
                 <li><Link to="/contacts">Contacts</Link></li>
+                <li><Link to="/products/10">Products</Link></li>
+                <li><Link to="/millennium-falcon">Millennium falcon</Link></li>
             </ul>
         </nav>
     );
