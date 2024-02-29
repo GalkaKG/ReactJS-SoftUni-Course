@@ -3,11 +3,12 @@ import { useParams, useNavigate, useLocation, Link, Route, Routes } from "react-
 
 export default function Starship() {
     const [starship, setStarship] = useState({});
+    const [film, setFilm] = useState({});
     // const params = useParams();
-    const { starshipId } = useParams();
+    const { starshipId, filmId } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
-    console.log(location);
+    // const location = useLocation();
+    // console.log(location);
 
     useEffect(() => {
         fetch(`https://swapi.dev/api/starships/${starshipId}/`)
@@ -19,6 +20,18 @@ export default function Starship() {
             navigate('/not-found');
         })
     }, [starshipId, navigate]);
+
+    useEffect(() => {
+        if (starship.films?.length > 0 && filmId) {
+            const fId = Number(filmId) - 1;
+            const filmUrl = starship.films[fId]
+            fetch(filmUrl)
+                .then(res => res.json())
+                .then(result => {
+                    setFilm(result);
+                })
+        }
+    }, [starship, filmId])
 
     const nextProductHandler = () => {
         navigate(`/starships/${Number(starshipId) + 1}`, {replace: false})
@@ -45,16 +58,14 @@ export default function Starship() {
             <nav>
                 <ul>
                     {starship.films?.map((x, i) => 
-                        <li key={x}><Link to={`/starships/${starshipId}/films/${i + 1}`}>Film {i + 1}</Link></li>
+                        <li key={x}><Link to={`films/${i + 1}`}>Film {i + 1}</Link></li>
                     )}
                 </ul>
             </nav>
 
             <section>
                 <Routes>
-                    <Route path={`films/1`} element={<h3>Film 1</h3>} />
-                    <Route path={`films/2`} element={<h3>Film 2</h3>} />
-                    <Route path={`films/3`} element={<h3>Film 3</h3>} />
+                    <Route path="films/:filmId" element={<h3>{film.title}</h3>} />
                 </Routes>
             </section>
 
