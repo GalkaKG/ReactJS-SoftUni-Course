@@ -1,34 +1,38 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-export default function Products() {
+export default function Starship() {
     const [starship, setStarship] = useState({});
     // const params = useParams();
-    const { productId } = useParams();
+    const { starshipId } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(location);
 
     useEffect(() => {
-        fetch(`https://swapi.dev/api/starships/${productId}/`)
+        fetch(`https://swapi.dev/api/starships/${starshipId}/`)
         .then(res => res.json())
         .then(result => {
             setStarship(result);
         })
-    }, []);
+        .catch(() => {
+            navigate('/not-found');
+        })
+    }, [starshipId]);
 
     const nextProductHandler = () => {
-        navigate(`/products/${Number(productId) + 1}`, {replace: false})
+        navigate(`/starships/${Number(starshipId) + 1}`, {replace: false})
     }
 
     return (
         <>
             <h2>
-                Product Page
+                Starships Page
             </h2>
 
             <h3>
-                {/* Product {params.productId} Specification */}
-                Product {productId} Specification
+                {/* Product {params.starshipId} Specification */}
+                Starship {starshipId} Specification
             </h3>
 
             <ul>

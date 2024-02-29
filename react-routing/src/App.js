@@ -6,7 +6,8 @@ import Pricing from './components/Pricing';
 import Contacts from './components/Contacts';
 import NotFound from './components/NotFound';
 import Navigation from './components/Navigation';
-import Products from './components/Products';
+import Starship from './components/Starship';
+import StarshipList from './components/StarshipList';
 import './App.css';
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/pricing/*' element={<Pricing />} />
-        <Route path='/contacts' element={<Contacts />} />.
-        <Route path='/products/:productId' element={<Products />} />
-        <Route path='/products/1' element={<Products />} />
-        <Route path='/millennium-falcon' element={<Navigate to={'/products/10'} />} />
+        <Route path='/contacts' element={<Contacts />} />
+        <Route path='/starships' element={<StarshipList />} />
+        <Route path='/starships/:starshipId' element={<Starship />} />
+        {/* <Route path='/starships/1' element={<Starship />} /> */}
+        <Route path='/millennium-falcon' element={<Navigate to={'/starships/10'} />} />
       </Routes>
     </div>
   );

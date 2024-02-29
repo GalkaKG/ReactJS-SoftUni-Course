@@ -1,15 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import styles from './Navigation.module.css';
 
 export default function Navigation() {
+    const setNavStyle = ({isActive}) => {
+        return isActive
+            ? styles['active-link']
+            : undefined;
+    }
+
     return (
         <nav>
             <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/pricing">Pricing</Link></li>
-                <li><Link to="/contacts">Contacts</Link></li>
-                <li><Link to="/products/10">Products</Link></li>
-                <li><Link to="/millennium-falcon">Millennium falcon</Link></li>
+                <li><NavLink className={setNavStyle} to="/">Home</NavLink></li>
+                <li><NavLink className={setNavStyle} to="/about">About</NavLink></li>
+                <li><NavLink className={setNavStyle} to="/pricing">Pricing</NavLink></li>
+                <li><NavLink className={setNavStyle} to="/contacts">Contacts</NavLink></li>
+
+                <li>
+                    <NavLink 
+                        to="/starships"
+                        // style={({isActive}) => ({
+                        //    background: isActive ? 'blue': 'lightgray'
+                        // })}
+                        className={setNavStyle}
+                    >
+                        Starships
+                    </NavLink>
+                </li>
+
+
+                <li><NavLink className={setNavStyle} to="/millennium-falcon">Millennium falcon</NavLink></li>
             </ul>
         </nav>
     );
