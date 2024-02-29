@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation, Link, Route, Routes } from "react-router-dom";
+import Film from "./Film";
+
 
 export default function Starship() {
     const [starship, setStarship] = useState({});
-    const [film, setFilm] = useState({});
     // const params = useParams();
-    const { starshipId, filmId } = useParams();
+    const { starshipId } = useParams();
     const navigate = useNavigate();
     // const location = useLocation();
     // console.log(location);
@@ -21,17 +22,7 @@ export default function Starship() {
         })
     }, [starshipId, navigate]);
 
-    useEffect(() => {
-        if (starship.films?.length > 0 && filmId) {
-            const fId = Number(filmId) - 1;
-            const filmUrl = starship.films[fId]
-            fetch(filmUrl)
-                .then(res => res.json())
-                .then(result => {
-                    setFilm(result);
-                })
-        }
-    }, [starship, filmId])
+    
 
     const nextProductHandler = () => {
         navigate(`/starships/${Number(starshipId) + 1}`, {replace: false})
@@ -65,7 +56,7 @@ export default function Starship() {
 
             <section>
                 <Routes>
-                    <Route path="films/:filmId" element={<h3>{film.title}</h3>} />
+                    <Route path="films/:filmId" element={<Film films={starship.films || [] } />} />
                 </Routes>
             </section>
 
