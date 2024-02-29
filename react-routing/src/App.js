@@ -24,7 +24,7 @@ function App() {
         <Route path='/pricing/*' element={<Pricing />} />
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/starships' element={<StarshipList />} />
-        <Route path='/starships/:starshipId' element={<Starship />} />
+        <Route path='/starships/:starshipId/*' element={<Starship />} />
         {/* <Route path='/starships/1' element={<Starship />} /> */}
         <Route path='/millennium-falcon' element={<Navigate to={'/starships/10'} />} />
       </Routes>

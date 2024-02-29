@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation, Link, Route, Routes } from "react-router-dom";
 
 export default function Starship() {
     const [starship, setStarship] = useState({});
@@ -18,7 +18,7 @@ export default function Starship() {
         .catch(() => {
             navigate('/not-found');
         })
-    }, [starshipId]);
+    }, [starshipId, navigate]);
 
     const nextProductHandler = () => {
         navigate(`/starships/${Number(starshipId) + 1}`, {replace: false})
@@ -40,6 +40,23 @@ export default function Starship() {
                 <li>Model: {starship.model}</li>
                 <li>Manufacturer: {starship.manufacturer}</li>
             </ul>
+
+            <h3>Movies</h3>
+            <nav>
+                <ul>
+                    {starship.films?.map((x, i) => 
+                        <li key={x}><Link to={`/starships/${starshipId}/films/${i + 1}`}>Film {i + 1}</Link></li>
+                    )}
+                </ul>
+            </nav>
+
+            <section>
+                <Routes>
+                    <Route path={`films/1`} element={<h3>Film 1</h3>} />
+                    <Route path={`films/2`} element={<h3>Film 2</h3>} />
+                    <Route path={`films/3`} element={<h3>Film 3</h3>} />
+                </Routes>
+            </section>
 
             <button onClick={nextProductHandler}>Next</button>
         </>
