@@ -28,9 +28,13 @@ function App() {
   //   removeTodo(taskId)
   //     .then(() => setTasks(state => state.filter(x => x._id != taskId)));   
   // }
+
+  const toggleTask = async (taskId) => {
+    setTasks(state => state.map(x => x._id == taskId ? {...x, isCompleted : !x.isCompleted} : x))
+  }
   
   return (
-    <TaskContext.Provider value={{tasks, taskDeleteHandler}}>
+    <TaskContext.Provider value={{tasks, taskDeleteHandler, toggleTask}}>
       <div className={styles['site-wrapper']}>
         <header>TODO App</header>
 
