@@ -19,6 +19,10 @@ function App() {
             title: newTask,
         }
     ]);
+  };
+
+  const taskDeleteHandler = (taskId) => {
+      setTasks(state => state.filter(x => x._id != taskId));
   }
   
   return (
@@ -26,7 +30,7 @@ function App() {
       <header>TODO App</header>
 
       <main>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
 
           <CreateTask taskCreateHandler={taskCreateHandler} />
       </main>
