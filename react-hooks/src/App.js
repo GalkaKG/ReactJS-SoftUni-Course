@@ -1,8 +1,9 @@
+import { TaskContext } from './contexts/TaskContext';
 import useFetch from './hooks/useFetch';
 import useTodosApi from './hooks/useTodosApi';
 import TaskList from './components/TaskList';
-import styles from './App.module.css';
 import CreateTask from './components/CreateTask';
+import styles from './App.module.css';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
 
   const taskDeleteHandler = async (taskId) => {
     await removeTodo(taskId);
-    
+
     setTasks(state => state.filter(x => x._id != taskId));   
   }
 
@@ -31,18 +32,20 @@ function App() {
   // }
   
   return (
-    <div className={styles['site-wrapper']}>
-      <header>TODO App</header>
+    <TaskContext.Provider value={"Galka"}>
+      <div className={styles['site-wrapper']}>
+        <header>TODO App</header>
 
-      <main>
-          {isLoading
-              ? <p>Loading...</p>
-              : <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
-          }
-          
-          <CreateTask taskCreateHandler={taskCreateHandler} />
-      </main>
-    </div>
+        <main>
+            {isLoading
+                ? <p>Loading...</p>
+                : <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
+            }
+            
+            <CreateTask taskCreateHandler={taskCreateHandler} />
+        </main>
+      </div>
+    </TaskContext.Provider>
   );
 }
 

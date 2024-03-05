@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { TaskContext } from "../contexts/TaskContext";
+import { useEffect, useContext } from "react";
 
 const TaskItem = ({ 
     title,
     taskDeleteHandler,
     taskId
 }) => {
+    const value = useContext(TaskContext);
+    console.log(value);
+
     useEffect(() => {
-        console.log('Mount');
+        // console.log('Mount');
 
         return () => {
-            console.log('Unmount');
+            // console.log('Unmount');
         }
     }, []);
 
