@@ -1,11 +1,13 @@
 import useFetch from './hooks/useFetch';
+import useTodosApi from './hooks/useTodosApi';
 import TaskList from './components/TaskList';
 import styles from './App.module.css';
 import CreateTask from './components/CreateTask';
 
 
 function App() {
-  const [tasks, setTasks] = useFetch('http://localhost:3030/jsonstore/todos', []);
+  const [tasks, setTasks, isLoading] = useFetch('http://localhost:3030/jsonstore/todos', []);
+  const { removeTodo } = useTodosApi();
 
   const taskCreateHandler = (newTask) => {
     setTasks(state => [
@@ -17,17 +19,27 @@ function App() {
     ]);
   };
 
-  const taskDeleteHandler = (taskId) => {
-      setTasks(state => state.filter(x => x._id != taskId));
+  const taskDeleteHandler = async (taskId) => {
+    await removeTodo(taskId);
+    
+    setTasks(state => state.filter(x => x._id != taskId));   
   }
+
+  // const taskDeleteHandler = (taskId) => {
+  //   removeTodo(taskId)
+  //     .then(() => setTasks(state => state.filter(x => x._id != taskId)));   
+  // }
   
   return (
     <div className={styles['site-wrapper']}>
       <header>TODO App</header>
 
       <main>
-          <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
-
+          {isLoading
+              ? <p>Loading...</p>
+              : <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
+          }
+          
           <CreateTask taskCreateHandler={taskCreateHandler} />
       </main>
     </div>
