@@ -1,10 +1,10 @@
+import { useContext } from "react";
 import TaskItem from "./TaskItem";
+import { TaskContext } from "../contexts/TaskContext";
 
-const TaskList = ({ 
-    tasks, 
-    taskDeleteHandler, 
-}) => {
-
+const TaskList = () => {
+    const {tasks} = useContext(TaskContext);
+    
     return (
         <ul>
             {tasks.map(x => 
@@ -12,7 +12,6 @@ const TaskList = ({
                     key={x._id}
                     taskId={x._id} 
                     title={x.title} 
-                    taskDeleteHandler={taskDeleteHandler} 
                 />
             )}
         </ul>

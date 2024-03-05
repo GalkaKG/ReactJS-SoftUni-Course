@@ -8,15 +8,13 @@ import styles from './App.module.css';
 
 function App() {
   const [tasks, setTasks, isLoading] = useFetch('http://localhost:3030/jsonstore/todos', []);
-  const { removeTodo } = useTodosApi();
+  const { removeTodo, createTodo } = useTodosApi();
 
-  const taskCreateHandler = (newTask) => {
+  const taskCreateHandler = async (newTask) => {
+    const createdTask = await createTodo(newTask)
     setTasks(state => [
         ...state, 
-        {
-            _id: state[state.length - 1]?._id + 1 || 1,
-            title: newTask,
-        }
+        createdTask,
     ]);
   };
 
@@ -32,14 +30,14 @@ function App() {
   // }
   
   return (
-    <TaskContext.Provider value={"Galka"}>
+    <TaskContext.Provider value={{tasks, taskDeleteHandler}}>
       <div className={styles['site-wrapper']}>
         <header>TODO App</header>
 
         <main>
             {isLoading
                 ? <p>Loading...</p>
-                : <TaskList tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
+                : <TaskList />
             }
             
             <CreateTask taskCreateHandler={taskCreateHandler} />

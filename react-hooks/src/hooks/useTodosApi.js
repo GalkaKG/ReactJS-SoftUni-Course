@@ -9,8 +9,16 @@ const useTodosApi = () => {
             .then(res => res.json())
     }
 
+    const createTodo = (title) => {
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({title})
+        }).then(res => res.json())
+    };
+
     return {
-        removeTodo
+        removeTodo,
+        createTodo,
     }
 };
 

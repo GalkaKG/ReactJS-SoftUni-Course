@@ -3,11 +3,9 @@ import { useEffect, useContext } from "react";
 
 const TaskItem = ({ 
     title,
-    taskDeleteHandler,
     taskId
 }) => {
-    const value = useContext(TaskContext);
-    console.log(value);
+    const { taskDeleteHandler } = useContext(TaskContext);
 
     useEffect(() => {
         // console.log('Mount');
