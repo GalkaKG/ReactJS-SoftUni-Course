@@ -8,7 +8,7 @@ import styles from './App.module.css';
 
 function App() {
   const [tasks, setTasks, isLoading] = useFetch('http://localhost:3030/jsonstore/todos', []);
-  const { removeTodo, createTodo } = useTodosApi();
+  const { removeTodo, createTodo, updateTodo } = useTodosApi();
 
   const taskCreateHandler = async (newTask) => {
     const createdTask = await createTodo(newTask)
@@ -29,12 +29,24 @@ function App() {
   //     .then(() => setTasks(state => state.filter(x => x._id != taskId)));   
   // }
 
-  const toggleTask = async (taskId) => {
-    setTasks(state => state.map(x => x._id == taskId ? {...x, isCompleted : !x.isCompleted} : x))
+  const toggleTask = async (task) => {
+    const updatedTask = {...task, isCompleted: !task.isCompleted};
+    await updateTodo(task._id, updatedTask);
+
+    setTasks(state => state.map(x => x._id == task._id ? updatedTask : x))
   }
+
+  
+  const taskEditHandler = async (task, newTitle) => {
+    const updatedTask = {...task, title: newTitle};
+
+    await updateTodo(task._id, updatedTask);
+
+    setTasks(state => state.map(x => x._id == task._id ? updatedTask : x))
+}
   
   return (
-    <TaskContext.Provider value={{tasks, taskDeleteHandler, toggleTask}}>
+    <TaskContext.Provider value={{tasks, taskDeleteHandler, toggleTask, taskEditHandler}}>
       <div className={styles['site-wrapper']}>
         <header>TODO App</header>
 
