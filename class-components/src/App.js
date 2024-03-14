@@ -8,6 +8,7 @@ class App extends Component {
       return(
         <div className="App">
           <main className="App-header">
+            <h1>ToDo List</h1>
             <TaskList />
           </main>
         </div>
