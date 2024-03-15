@@ -1,5 +1,6 @@
 import { Component } from "react";
 import TaskItem from "./TaskItem";
+import { TaskContext } from "../contexts/TaskContext";
 
 class TaskList extends Component {
     constructor(props) {
@@ -28,9 +29,9 @@ class TaskList extends Component {
             });
     }
 
-    componentDidUpdate() {
-        console.log('Did update');
-    }
+    // componentDidUpdate() {
+    //     console.log('Did update');
+    // }
 
     // componentWillUnmount() {
 
@@ -42,7 +43,7 @@ class TaskList extends Component {
 
     addNewTaskHandler(e) {
         e.preventDefault();
-        this.setState((state, props) => ({
+        this.setState((state) => ({
             tasks: [...state.tasks, { title: state.newTask, isCompleted: false }],
             newTask: '',
         }));
@@ -54,9 +55,18 @@ class TaskList extends Component {
         }));
     }
 
+    taskDeleteHandler(e, taskTitle) {
+        e.stopPropagation();
+
+        this.setState(state =>({
+            tasks: state.tasks.filter(x => x.title !== taskTitle)
+        }))
+    }
+
     render() {
         return(
-            <>  <h2>Current Character: {this.state.character.name}</h2>
+            <TaskContext.Provider value={{ taskDeleteHandler: this.taskDeleteHandler.bind(this) }}>  
+                <h2>Current Character: {this.state.character.name}</h2>
 
                 <ul>
                     {this.state.tasks.map(x => 
@@ -81,7 +91,7 @@ class TaskList extends Component {
 
                     <input type="submit" value="Add" />
                 </form>
-            </>
+            </TaskContext.Provider>
         );
     }
 }
