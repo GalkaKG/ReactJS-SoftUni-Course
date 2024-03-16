@@ -97,4 +97,4 @@ class TaskList extends Component {
     }
 }
 
-export default TaskList;
+export default withRouter(TaskList);
