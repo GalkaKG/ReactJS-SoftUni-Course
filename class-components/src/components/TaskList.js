@@ -1,6 +1,7 @@
 import { Component } from "react";
 import TaskItem from "./TaskItem";
 import { TaskContext } from "../contexts/TaskContext";
+import withRouter from "../hoc/withRouter";
 
 class TaskList extends Component {
     constructor(props) {
