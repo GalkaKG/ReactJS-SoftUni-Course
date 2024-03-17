@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import CharacterItem from "./CharacterItem";
 
 const CharacterList = ({
@@ -6,9 +6,11 @@ const CharacterList = ({
 }) => {
     const [favorite, setFavorite] = useState('');
 
-    const selectFavorite = (name) => {
+    const selectFavorite = useCallback((name) => {
         setFavorite(name);
-    }
+    }, []);
+
+    // const memorizedValue = useMemo()
 
     return (
         <>

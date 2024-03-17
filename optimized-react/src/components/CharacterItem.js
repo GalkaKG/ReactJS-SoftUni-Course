@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 const CharacterItem = ({
     name,
     onClick
@@ -7,4 +9,4 @@ const CharacterItem = ({
     );
 }
 
-export default CharacterItem;
+export default memo(CharacterItem);
