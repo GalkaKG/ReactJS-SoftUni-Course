@@ -1,10 +1,9 @@
-
-
 const CharacterItem = ({
-    name
+    name,
+    onClick
 }) => {
     return (
-        <li>{name}</li>
+        <li onClick={() => onClick(name)}>{name}</li>
     );
 }
 
